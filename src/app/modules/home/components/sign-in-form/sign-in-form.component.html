@@ -1,1 +1,31 @@
-<p>sign-in-form works!</p>
+<div class="card mt-4">
+  <div class="card-header text-center">
+    <h3>Sign in</h3>
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Email"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Password"
+        />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">
+          Sign in
+        </button>
+      </div>
+    </form>
+    <a routerLink="/signup">I need an account</a>
+  </div>
+</div>
