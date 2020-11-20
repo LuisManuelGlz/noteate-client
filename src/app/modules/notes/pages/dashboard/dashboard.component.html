@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<div class="row">
+  <div class="col-lg-4 mb-4 card-container fade show">
+    <app-save-note-form></app-save-note-form>
+  </div>
+  <div class="col-lg-8">
+    <app-notes-list></app-notes-list>
+  </div>
+  <app-confirm-delete-note></app-confirm-delete-note>
+</div>
+<button
+  class="btn btn-primary btn-lg rounded-circle"
+  style="position: fixed; right: 30px; bottom: 20px; z-index: 100"
+>
+  <b>+</b>
+</button>
