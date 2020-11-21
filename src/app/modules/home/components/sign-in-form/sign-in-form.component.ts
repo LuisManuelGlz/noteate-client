@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -12,11 +13,26 @@ export class SignInFormComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
-  constructor() {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.signInForm.value);
+    this.authenticationService.signIn(this.signInForm.value).subscribe(
+      () => {
+        console.log('Success');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  get email() {
+    return this.signInForm.get('email');
+  }
+
+  get password() {
+    return this.signInForm.get('password');
   }
 }

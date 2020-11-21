@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { MustMatch } from 'src/app/core/utils/validators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { MustMatch } from 'src/app/shared/utils/validators/must-match.validator';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -20,14 +17,12 @@ export class SignUpFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
       ]),
-      password2: new FormControl('', [
-        Validators.required,
-      ]),
+      password2: new FormControl('', [Validators.required]),
     },
     { validators: MustMatch('password1', 'password2') }
   );
 
-  constructor() {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {}
 
@@ -48,6 +43,13 @@ export class SignUpFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signUpForm.value);
+    this.authenticationService.signUp(this.signUpForm.value).subscribe(
+      () => {
+        console.log('Success!');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
