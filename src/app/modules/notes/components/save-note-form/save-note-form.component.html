@@ -6,23 +6,25 @@
     </button>
   </div>
   <div class="card-body">
-    <form>
+    <form [formGroup]="saveNoteForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <input
           type="text"
           class="form-control"
-          name="title"
+          formControlName="title"
           placeholder="Title"
+          required
         />
       </div>
       <div class="form-group">
         <textarea
           type="text"
           class="form-control"
-          name="content"
+          formControlName="content"
           placeholder="Content"
           style="resize: none"
           rows="3"
+          required
         ></textarea>
       </div>
       <div class="form-group">

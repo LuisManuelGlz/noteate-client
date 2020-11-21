@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-save-note-form',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./save-note-form.component.css']
 })
 export class SaveNoteFormComponent implements OnInit {
+  saveNoteForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    content: new FormControl('', Validators.required),
+  });
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onSubmit() {
+    console.log(this.saveNoteForm.value);
   }
-
 }
