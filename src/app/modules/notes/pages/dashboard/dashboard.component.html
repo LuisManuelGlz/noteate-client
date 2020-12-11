@@ -1,9 +1,16 @@
 <div class="row">
   <div class="col-lg-4 mb-4 card-container fade show">
-    <app-save-note-form></app-save-note-form>
+    <app-save-note-form
+      [noteData]="noteData"
+      (addNoteEvent)="addNote($event)"
+      (editNoteEvent)="editNote($event)"
+    ></app-save-note-form>
   </div>
   <div class="col-lg-8">
-    <app-notes-list></app-notes-list>
+    <app-notes-list
+      [notes]="notes"
+      (setNoteDataEvent)="setNoteData($event)"
+    ></app-notes-list>
   </div>
   <!-- <app-confirm-delete-note></app-confirm-delete-note> -->
 </div>

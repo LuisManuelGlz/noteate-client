@@ -1,12 +1,13 @@
 <div class="card">
   <div class="card-header text-center">
-    <span class="h3">Test</span>
+    <span class="h3">Save note</span>
     <button type="button" class="close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="card-body">
     <form [formGroup]="saveNoteForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" formControlName="_id" />
       <div class="form-group">
         <input
           type="text"
@@ -32,6 +33,7 @@
           type="submit"
           class="btn btn-primary btn-block"
           title="Save note"
+          [disabled]="!saveNoteForm.valid"
         >
           Save
         </button>
@@ -41,6 +43,8 @@
           type="button"
           class="btn btn-secondary btn-block"
           title="Clear form"
+          (click)="clear()"
+          [disabled]="!(saveNoteForm.value.title || saveNoteForm.value.content)"
         >
           Clear
         </button>

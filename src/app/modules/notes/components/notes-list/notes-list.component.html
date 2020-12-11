@@ -1,7 +1,40 @@
 <div class="row">
-  <div class="card mx-auto">
-    <div class="card-body">
-      <p class="lead">No notes yet</p>
+  <ng-container *ngIf="notes.length > 0; else noNotes">
+    <div *ngFor="let note of notes" class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="d-flex justify-content-between">
+            <span class="text-break">{{ note.title }}</span>
+            <span
+              title="Editar nota"
+              class="text-primary ml-1"
+              style="cursor: pointer"
+              (click)="setNoteData(note)"
+            >
+              <i class="fas fa-edit"></i>
+            </span>
+          </h5>
+        </div>
+        <div class="card-body">
+          <p>{{ note.content }}</p>
+          <button
+            title="Eliminar nota"
+            class="btn btn-danger btn-block btn-sm"
+            data-toggle="modal"
+            data-target="#deleteNoteModal"
+          >
+            <i class="fas fa-trash-alt"></i>
+            <span class="ml-1"> Eliminar </span>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #noNotes>
+    <div class="card mx-auto">
+      <div class="card-body">
+        <p class="lead">No notes yet</p>
+      </div>
+    </div>
+  </ng-template>
 </div>

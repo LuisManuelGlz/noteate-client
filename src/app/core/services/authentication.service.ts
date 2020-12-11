@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserForSignIn } from 'src/app/shared/models/user-for-sign-in';
 import { UserForSignUp } from 'src/app/shared/models/user-for-sign-up';
@@ -15,7 +15,9 @@ export class AuthenticationService {
   public token: Observable<string>;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.tokenSubject = new BehaviorSubject<string>(localStorage.getItem('token'));
+    this.tokenSubject = new BehaviorSubject<string>(
+      localStorage.getItem('token')
+    );
     this.token = this.tokenSubject.asObservable();
   }
 
@@ -29,6 +31,7 @@ export class AuthenticationService {
       .pipe(
         map((response: any) => {
           localStorage.setItem('token', JSON.stringify(response.accessToken));
+          this.router.navigate(['/notes']);
         })
       );
   }
@@ -39,6 +42,7 @@ export class AuthenticationService {
       .pipe(
         map((response: any) => {
           localStorage.setItem('token', JSON.stringify(response.accessToken));
+          this.router.navigate(['/notes']);
         })
       );
   }
