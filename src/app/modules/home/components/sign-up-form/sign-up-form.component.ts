@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { MustMatch } from 'src/app/shared/utils/validators/must-match.validator';
 
 @Component({
@@ -22,7 +23,7 @@ export class SignUpFormComponent implements OnInit {
     { validators: MustMatch('password1', 'password2') }
   );
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -43,12 +44,15 @@ export class SignUpFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authenticationService.signUp(this.signUpForm.value).subscribe(
+    this.authService.signUp(this.signUpForm.value).subscribe(
       () => {
         console.log('Success!');
       },
       (error) => {
         console.log(error);
+      },
+      () => {
+        this.router.navigate(['/notes']);
       }
     );
   }

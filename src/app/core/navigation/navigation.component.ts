@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,10 +7,7 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.handleNavbarNav();
@@ -42,7 +38,11 @@ export class NavigationComponent implements OnInit {
     });
   }
 
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
+
   logOut() {
-    this.authenticationService.logOut();
+    this.authService.logOut();
   }
 }

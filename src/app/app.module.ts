@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './modules/home/home.module';
 import { NotesModule } from './modules/notes/notes.module';
-import { AuthenticationInterceptor } from './core/interceptors/authentication.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +21,7 @@ import { AuthenticationInterceptor } from './core/interceptors/authentication.in
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthenticationInterceptor,
+      useClass: AuthInterceptor,
       multi: true,
     },
   ],

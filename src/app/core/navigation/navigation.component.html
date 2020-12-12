@@ -16,12 +16,16 @@
       <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
     </div>
     <div class="navbar-nav ml-auto">
-      <a class="nav-link" routerLink="/notes" routerLinkActive="active">
-        Notes
-      </a>
-      <a class="nav-link" style="cursor: pointer" (click)="logOut()">Log out</a>
-      <a class="nav-link" href="#">Sign in</a>
-      <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign up</a>
+      <ng-container *ngIf="isAuthenticated(); else notAuthenticated">
+        <a class="nav-link" routerLink="/notes" routerLinkActive="active">
+          Notes
+        </a>
+        <a class="nav-link" style="cursor: pointer" (click)="logOut()">Log out</a>
+      </ng-container>
+      <ng-template #notAuthenticated>
+        <a class="nav-link" href="#">Sign in</a>
+        <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign up</a>
+      </ng-template>
     </div>
   </div>
 </nav>
