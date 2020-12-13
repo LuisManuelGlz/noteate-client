@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, OnChanges, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  OnChanges,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotesService } from 'src/app/core/services/notes.service';
 import { Note } from 'src/app/shared/models/note';
@@ -38,22 +45,30 @@ export class SaveNoteFormComponent implements OnInit, OnChanges {
     this.isLoading = true;
     const { value } = this.saveNoteForm;
     if (value._id) {
-      this.notesService.update(value).subscribe(() => {
-        this.editNoteEvent.emit(value);
-        this.isLoading = false;
-      }, (error) => {
-        console.log(error);
-        this.isLoading = false;
-      });
+      this.notesService.update(value).subscribe(
+        (noteUpdated) => {
+          this.editNoteEvent.emit(noteUpdated);
+          this.isLoading = false;
+        },
+        (error) => {
+          console.log(error);
+          this.isLoading = false;
+        }
+      );
     } else {
-      const noteForCreate = { title: value.title, content: value.content };
-      this.notesService.create(noteForCreate).subscribe(() => {
-        this.addNoteEvent.emit(noteForCreate);
-        this.isLoading = false;
-      }, (error) => {
-        console.log(error);
-        this.isLoading = false;
-      });
+      const noteForCreate = value;
+      delete noteForCreate._id;
+
+      this.notesService.create(noteForCreate).subscribe(
+        (noteCreated) => {
+          this.addNoteEvent.emit(noteCreated);
+          this.isLoading = false;
+        },
+        (error) => {
+          console.log(error);
+          this.isLoading = false;
+        }
+      );
     }
     this.clear();
   }
