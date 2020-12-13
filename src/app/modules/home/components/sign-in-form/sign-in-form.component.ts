@@ -23,13 +23,13 @@ export class SignInFormComponent implements OnInit {
     this.isLoading = true;
     this.authService.signIn(this.signInForm.value).subscribe(
       () => {
-        console.log('Sign in successful');
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       },
       () => {
-        this.isLoading = false;
         this.router.navigate(['/notes']);
       }
     );
