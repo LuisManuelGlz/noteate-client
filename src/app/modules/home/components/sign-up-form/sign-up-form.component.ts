@@ -48,13 +48,13 @@ export class SignUpFormComponent implements OnInit {
     this.isLoading = true;
     this.authService.signUp(this.signUpForm.value).subscribe(
       () => {
-        console.log('Sign up successful');
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       },
       () => {
-        this.isLoading = false;
         this.router.navigate(['/notes']);
       }
     );
