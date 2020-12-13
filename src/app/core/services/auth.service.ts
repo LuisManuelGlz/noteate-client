@@ -51,7 +51,7 @@ export class AuthService {
 
   logOut() {
     this.removeToken();
-    this.router.navigate(['/']);
+    this.router.navigate(['/signin']);
   }
 
   private getToken() {

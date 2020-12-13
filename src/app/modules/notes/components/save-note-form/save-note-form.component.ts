@@ -14,6 +14,7 @@ export class SaveNoteFormComponent implements OnInit, OnChanges {
   @Output() editNoteEvent = new EventEmitter();
   @Output() getNoteDataEvent = new EventEmitter();
 
+  isLoading = false;
   saveNoteForm = new FormGroup({
     _id: new FormControl(''),
     title: new FormControl('', [Validators.required]),
@@ -34,15 +35,24 @@ export class SaveNoteFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
+    this.isLoading = true;
     const { value } = this.saveNoteForm;
     if (value._id) {
       this.notesService.update(value).subscribe(() => {
         this.editNoteEvent.emit(value);
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        this.isLoading = false;
       });
     } else {
       const noteForCreate = { title: value.title, content: value.content };
       this.notesService.create(noteForCreate).subscribe(() => {
         this.addNoteEvent.emit(noteForCreate);
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        this.isLoading = false;
       });
     }
     this.clear();

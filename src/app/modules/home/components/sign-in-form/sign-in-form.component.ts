@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./sign-in-form.component.css'],
 })
 export class SignInFormComponent implements OnInit {
+  isLoading = false;
   signInForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -19,14 +20,16 @@ export class SignInFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
+    this.isLoading = true;
     this.authService.signIn(this.signInForm.value).subscribe(
       () => {
-        console.log('Success');
+        console.log('Sign in successful');
       },
       (error) => {
         console.log(error);
       },
       () => {
+        this.isLoading = false;
         this.router.navigate(['/notes']);
       }
     );

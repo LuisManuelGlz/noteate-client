@@ -37,9 +37,15 @@
       <div class="form-group">
         <button
           type="submit"
-          [disabled]="!signInForm.valid"
+          [disabled]="!signInForm.valid || isLoading"
           class="btn btn-primary btn-block"
         >
+          <span
+            *ngIf="isLoading"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
           Sign in
         </button>
       </div>

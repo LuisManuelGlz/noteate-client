@@ -33,8 +33,14 @@
           type="submit"
           class="btn btn-primary btn-block"
           title="Save note"
-          [disabled]="!saveNoteForm.valid"
+          [disabled]="!saveNoteForm.valid || isLoading"
         >
+        <span
+          *ngIf="isLoading"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
           Save
         </button>
       </div>

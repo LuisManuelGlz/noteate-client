@@ -10,6 +10,7 @@ import { MustMatch } from 'src/app/shared/utils/validators/must-match.validator'
   styleUrls: ['./sign-up-form.component.css'],
 })
 export class SignUpFormComponent implements OnInit {
+  isLoading = false;
   signUpForm = new FormGroup(
     {
       name: new FormControl('', Validators.required),
@@ -44,14 +45,16 @@ export class SignUpFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.authService.signUp(this.signUpForm.value).subscribe(
       () => {
-        console.log('Success!');
+        console.log('Sign up successful');
       },
       (error) => {
         console.log(error);
       },
       () => {
+        this.isLoading = false;
         this.router.navigate(['/notes']);
       }
     );
