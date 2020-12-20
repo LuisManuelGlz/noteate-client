@@ -8,15 +8,15 @@ import { Note } from 'src/app/shared/models/note';
 })
 export class NotesListComponent implements OnInit {
   @Input() notes: Note[];
-  @Output() setNoteDataEvent = new EventEmitter();
+  @Output() setNoteForSaveEvent = new EventEmitter();
   @Output() setNoteForDeleteEvent = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  setNoteData(noteData: Note) {
-    this.setNoteDataEvent.emit(noteData);
+  setNoteForSave(noteForSave: Note) {
+    this.setNoteForSaveEvent.emit(noteForSave);
   }
 
   setNoteForDelete(noteForDelete: Note) {

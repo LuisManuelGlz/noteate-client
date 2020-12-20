@@ -8,7 +8,7 @@ import { Note } from 'src/app/shared/models/note';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  noteData: Note;
+  noteForSave: Note;
   noteForDelete: Note;
   notes: Note[] = [];
 
@@ -39,8 +39,8 @@ export class DashboardComponent implements OnInit {
     this.notes = this.notes.filter((note) => note._id !== noteId);
   }
 
-  setNoteData(noteData: Note) {
-    this.noteData = noteData;
+  setNoteForSave(noteForSave: Note) {
+    this.noteForSave = noteForSave;
   }
 
   setNoteForDelete(noteForDelete: Note) {

@@ -16,10 +16,10 @@ import { Note } from 'src/app/shared/models/note';
   styleUrls: ['./save-note-form.component.css'],
 })
 export class SaveNoteFormComponent implements OnInit, OnChanges {
-  @Input() noteData: Note;
+  @Input() noteForSave: Note;
   @Output() addNoteEvent = new EventEmitter();
   @Output() editNoteEvent = new EventEmitter();
-  @Output() getNoteDataEvent = new EventEmitter();
+  @Output() getNoteForSaveEvent = new EventEmitter();
 
   isLoading = false;
   saveNoteForm = new FormGroup({
@@ -33,8 +33,8 @@ export class SaveNoteFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(): void {
-    if (this.noteData) {
-      const { _id, title, content } = this.noteData;
+    if (this.noteForSave) {
+      const { _id, title, content } = this.noteForSave;
       this.saveNoteForm.controls._id.setValue(_id);
       this.saveNoteForm.controls.title.setValue(title);
       this.saveNoteForm.controls.content.setValue(content);
