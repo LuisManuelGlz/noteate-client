@@ -17,6 +17,7 @@ import { Note } from 'src/app/shared/models/note';
 })
 export class SaveNoteFormComponent implements OnInit, OnChanges {
   @Input() noteForSave: Note;
+  @Output() handleDisplayFormEvent = new EventEmitter();
   @Output() addNoteEvent = new EventEmitter();
   @Output() editNoteEvent = new EventEmitter();
   @Output() getNoteForSaveEvent = new EventEmitter();

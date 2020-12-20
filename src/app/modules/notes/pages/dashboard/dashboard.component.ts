@@ -8,6 +8,7 @@ import { Note } from 'src/app/shared/models/note';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  showForm: boolean = true;
   noteForSave: Note;
   noteForDelete: Note;
   notes: Note[] = [];
@@ -16,6 +17,28 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllNotes();
+  }
+
+  handleDisplayForm(show: boolean) {
+    const saveFormContainer = document.querySelector(
+      '.save-form-container'
+    ) as HTMLElement;
+
+    if (show) {
+      saveFormContainer.classList.add('show');
+      saveFormContainer.style.display = 'block';
+      this.showForm = true;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      saveFormContainer.classList.remove('show');
+      setTimeout(() => {
+        saveFormContainer.style.display = 'none';
+        this.showForm = false;
+      }, 400);
+    }
   }
 
   getAllNotes() {
@@ -41,6 +64,7 @@ export class DashboardComponent implements OnInit {
 
   setNoteForSave(noteForSave: Note) {
     this.noteForSave = noteForSave;
+    this.handleDisplayForm(true);
   }
 
   setNoteForDelete(noteForDelete: Note) {

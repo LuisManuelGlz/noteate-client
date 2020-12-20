@@ -1,13 +1,15 @@
 <div class="row">
-  <div class="col-lg-4 mb-4 card-container fade show">
+  <div class="col-lg-4 mb-4 save-form-container fade show">
     <app-save-note-form
       [noteForSave]="noteForSave"
+      (handleDisplayFormEvent)="handleDisplayForm($event)"
       (addNoteEvent)="addNote($event)"
       (editNoteEvent)="editNote($event)"
     ></app-save-note-form>
   </div>
-  <div class="col-lg-8">
+  <div [ngClass]="showForm ? 'col-lg-8' : 'col-lg-12'">
     <app-notes-list
+      [showForm]="showForm"
       [notes]="notes"
       (setNoteForSaveEvent)="setNoteForSave($event)"
       (setNoteForDeleteEvent)="setNoteForDelete($event)"
@@ -20,7 +22,9 @@
 </div>
 <button
   class="btn btn-primary btn-lg rounded-circle"
+  [ngClass]="{ 'd-none': showForm !== false }"
   style="position: fixed; right: 30px; bottom: 20px; z-index: 100"
+  (click)="handleDisplayForm(true)"
 >
   <b>+</b>
 </button>

@@ -7,6 +7,7 @@ import { Note } from 'src/app/shared/models/note';
   styleUrls: ['./notes-list.component.css'],
 })
 export class NotesListComponent implements OnInit {
+  @Input() showForm: boolean;
   @Input() notes: Note[];
   @Output() setNoteForSaveEvent = new EventEmitter();
   @Output() setNoteForDeleteEvent = new EventEmitter();
