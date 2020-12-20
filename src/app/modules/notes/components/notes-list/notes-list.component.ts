@@ -9,6 +9,7 @@ import { Note } from 'src/app/shared/models/note';
 export class NotesListComponent implements OnInit {
   @Input() notes: Note[];
   @Output() setNoteDataEvent = new EventEmitter();
+  @Output() setNoteForDeleteEvent = new EventEmitter();
 
   constructor() {}
 
@@ -16,5 +17,9 @@ export class NotesListComponent implements OnInit {
 
   setNoteData(noteData: Note) {
     this.setNoteDataEvent.emit(noteData);
+  }
+
+  setNoteForDelete(noteForDelete: Note) {
+    this.setNoteForDeleteEvent.emit(noteForDelete)
   }
 }

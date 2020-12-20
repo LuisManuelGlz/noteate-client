@@ -1,4 +1,4 @@
-<form
+<div
   class="modal fade"
   id="deleteNoteModal"
   tabIndex="-1"
@@ -23,7 +23,7 @@
       <div class="modal-body">
         <p class="text-break">
           Are you sure you want to delete
-          <b>"Test"</b>?
+          <b>{{ noteForDelete ? noteForDelete.title : "this note" }}</b>?
         </p>
       </div>
       <div class="modal-footer">
@@ -31,19 +31,19 @@
           type="button"
           class="btn btn-secondary"
           data-dismiss="modal"
-          id="clickeable"
           title="Cancel"
         >
           Cancel
         </button>
         <button
-          type="submit"
           class="btn btn-danger"
+          data-dismiss="modal"
           title="Delete note"
+          (click)="deleteNote()"
         >
           Delete
         </button>
       </div>
     </div>
   </div>
-</form>
+</div>

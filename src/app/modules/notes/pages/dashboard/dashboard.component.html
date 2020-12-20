@@ -10,9 +10,13 @@
     <app-notes-list
       [notes]="notes"
       (setNoteDataEvent)="setNoteData($event)"
+      (setNoteForDeleteEvent)="setNoteForDelete($event)"
     ></app-notes-list>
   </div>
-  <!-- <app-confirm-delete-note></app-confirm-delete-note> -->
+      <app-confirm-delete-note
+        [noteForDelete]="noteForDelete"
+        (deleteNoteEvent)="deleteNote($event)"
+      ></app-confirm-delete-note>
 </div>
 <button
   class="btn btn-primary btn-lg rounded-circle"

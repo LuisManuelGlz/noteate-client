@@ -9,6 +9,7 @@ import { Note } from 'src/app/shared/models/note';
 })
 export class DashboardComponent implements OnInit {
   noteData: Note;
+  noteForDelete: Note;
   notes: Note[] = [];
 
   constructor(private notesService: NotesService) {}
@@ -34,7 +35,15 @@ export class DashboardComponent implements OnInit {
     this.notes[noteIndex] = { ...noteForUpdate };
   }
 
+  deleteNote(noteId: string) {
+    this.notes = this.notes.filter((note) => note._id !== noteId);
+  }
+
   setNoteData(noteData: Note) {
     this.noteData = noteData;
+  }
+
+  setNoteForDelete(noteForDelete: Note) {
+    this.noteForDelete = noteForDelete;
   }
 }
